@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   void _submitForm() async{
     if(_formKey.currentState!.validate()){
       
-      const String scriptURL  = 'https://script.google.com/macros/s/AKfycbyNGGiTDchb2LxuyF0ryMgrJhndIZa3wkMNlIikXiNCLnSjY78J/exec';
+      const String scriptURL  = '';
 
       String tempName     = nameController.text;
       String tempSex      = sexController.text;
