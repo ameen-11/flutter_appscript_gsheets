@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-
-void main() async{
+void main() async {
   runApp(const MyApp());
 }
 
@@ -33,41 +32,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _formKey        = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   /// Controllers
-  TextEditingController nameController    = TextEditingController();
-  TextEditingController sexController     = TextEditingController();
-  TextEditingController ageController     = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController sexController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
 
+  void _submitForm() async {
+    if (_formKey.currentState!.validate()) {
+      const String scriptURL =
+          'https://script.google.com/macros/s/AKfycbyNGGiTDchb2LxuyF0ryMgrJhndIZa3wkMNlIikXiNCLnSjY78J/exec';
 
-  void _submitForm() async{
-    if(_formKey.currentState!.validate()){
-      
-      const String scriptURL  = '';
+      String tempName = nameController.text;
+      String tempSex = sexController.text;
+      String tempAge = ageController.text;
 
-      String tempName     = nameController.text;
-      String tempSex      = sexController.text;
-      String tempAge      = ageController.text;
+      String queryString = "?name=$tempName&sex=$tempSex&age=$tempAge";
 
-      String queryString  = "?name=$tempName&sex=$tempSex&age=$tempAge";
-
-      var finalURI   = Uri.parse(scriptURL + queryString);
-      var response    = await http.get(finalURI);
+      var finalURI = Uri.parse(scriptURL + queryString);
+      var response = await http.get(finalURI);
       //print(finalURI);
-      
+
       if (response.statusCode == 200) {
         var bodyR = convert.jsonDecode(response.body);
         print(bodyR);
       }
-
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -81,8 +76,8 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 TextFormField(
-                  validator: (value){
-                    if(value ==""){
+                  validator: (value) {
+                    if (value == "") {
                       return "Enter a valid value for name";
                     }
                   },
@@ -92,8 +87,8 @@ class _HomePageState extends State<HomePage> {
                   controller: nameController,
                 ),
                 TextFormField(
-                  validator: (value){
-                    if(value == ""){
+                  validator: (value) {
+                    if (value == "") {
                       return "Enter a valid Sex";
                     }
                   },
@@ -103,8 +98,8 @@ class _HomePageState extends State<HomePage> {
                   controller: sexController,
                 ),
                 TextFormField(
-                  validator: (value){
-                    if(value == ""){
+                  validator: (value) {
+                    if (value == "") {
                       return "Enter a valid Action";
                     }
                   },
@@ -113,10 +108,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   controller: ageController,
                 ),
-                SizedBox(height: 10,),
-                RaisedButton(onPressed: (){ 
-                  _submitForm();
-                },
+                SizedBox(
+                  height: 10,
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    _submitForm();
+                  },
                   child: Text('Save Details'),
                 ),
               ],
