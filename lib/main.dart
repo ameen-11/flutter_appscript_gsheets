@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       const String scriptURL =
-          'https://script.google.com/macros/s/AKfycbyNGGiTDchb2LxuyF0ryMgrJhndIZa3wkMNlIikXiNCLnSjY78J/exec';
+          'https://script.google.com/u/0/home/projects/1-n5R68mrSXRwmcjXMqYkfZUtYH785lFJTiwzEZfl7ZFwyfmspARnSz1-/edit';
 
       String tempName = nameController.text;
       String tempSex = sexController.text;
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 10,
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () {
                     _submitForm();
                   },
